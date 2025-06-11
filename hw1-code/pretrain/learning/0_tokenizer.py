@@ -85,8 +85,14 @@ def train_tokenizer():
     print("Tokenizer training complete and saved to", tokenizer_dir)
     
 def eval_tokenizer():
-    from transformers import AutoTokenizer 
-    tokenizer = AutoTokenizer.from_pretrained("/cpfs/user/boyuan/verl_workspace/hw1_code/hw1-code/pretrain/models/")
+    # from transformers import AutoTokenizer 
+    from transformers import PreTrainedTokenizerFast
+    # tokenizer = AutoTokenizer.from_pretrained("/cpfs/user/boyuan/verl_workspace/hw1_code/hw1-code/pretrain/models/")
+    tokenizer = PreTrainedTokenizerFast(tokenizer_file="/cpfs/user/boyuan/verl_workspace/hw1_code/hw1-code/pretrain/models/tokenizer.json")
+
+
+    tokenizer.chat_template=""""chat_template": "{% if messages[0]['role'] == 'system' %}{% set system_message = messages[0]['content'] %}{{ '<|im_start|>system\\n' + system_message + '<|im_end|>\\n' }}{% else %}{{ '<|im_start|>system\\nYou are a helpful assistant<|im_end|>\\n' }}{% endif %}{% for message in messages %}{% set content = message['content'] %}{% if message['role'] == 'user' %}{{ '<|im_start|>user\\n' + content + '<|im_end|>\\n<|im_start|>assistant\\n' }}{% elif message['role'] == 'assistant' %}{{ content + '<|im_end|>' + '\\n' }}{% endif %}{% endfor %}"
+"""
 
     messages = [
         {"role": "system", "content": "你是一个优秀的聊天机器人，充满了幽默感。"},
@@ -95,7 +101,6 @@ def eval_tokenizer():
         {"role": "user", "content": "你能帮我写一首关于香菜和榴莲的诗吗？"},
         {"role": "assistant", "content": "香菜飘香榴莲甜，\n味蕾交织如梦幻。\n一口清新一口浓，\n两种风味共此生。"}
     ]
-
     new_prompt = tokenizer.apply_chat_template(messages,tokenize=False)
     print("New Prompt:", new_prompt)
 
@@ -110,6 +115,6 @@ def eval_tokenizer():
     print("If Decoded Response equal? :", response == new_prompt)
 
 if __name__ == "__main__":
-    train_tokenizer()
+    # train_tokenizer()
     eval_tokenizer()
     print("Tokenizer training and evaluation completed successfully.")
