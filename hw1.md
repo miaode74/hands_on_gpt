@@ -1,9 +1,4 @@
 
-【Preface】
-基本上我觉得copy 一个AK 的 project 是在是有些无聊呢！
-我决定 自己来一个进阶版的作业. 
-
-
 # 1. Tokenization (10分)
 
 ## 1.1 实现BPE，训练Tokenizer（6分）
@@ -159,7 +154,7 @@ sentence1 = """Originated as the Imperial University of Peking in 1898, Peking U
 sentence2 = """博士学位论文应当表明作者具有独立从事科学研究工作的能力，并在科学或专门技术上做出创造性的成果。博士学位论文或摘要，应当在答辩前三个月印送有关单位，并经同行评议。学位授予单位应当聘请两位与论文有关学科的专家评阅论文，其中一位应当是外单位的专家。评阅人应当对论文写详细的学术评语，供论文答辩委员会参考。 """
 
 for i, (name, text) in enumerate([("Sentence 1 (English)", sentence1), ("Sentence 2 (Chinese)", sentence2)], 1):
-    print(f"\n{'='*30}\n【{name}】\n")
+    print(f"{'='*30}【{name}】")
 
     # GPT-2 encode
     gpt2_ids = gpt2_tokenizer.encode(text, add_special_tokens=False)
@@ -170,7 +165,7 @@ for i, (name, text) in enumerate([("Sentence 1 (English)", sentence1), ("Sentenc
 
     # Custom tokenizer encode
     custom_ids = cqx.encode(text)
-    print(f"\n▶ cqx own BPE Tokenizer:")
+    print(f"▶ cqx own BPE Tokenizer:")
     print(f"- Token Count: {len(custom_ids)}")
     print(f"- First 10 Token IDs: {custom_ids[:20]}")
     print(f"- Decoded (First 100 IDs): {cqx.decode(custom_ids[:100])}")
@@ -344,9 +339,76 @@ f(q,m) * f(q,n) = g(q,k,m-n)
 RoPE 代码如下
 ![alt text](asset\rope_code.png)
 
+### Attention
+我这里实现的 Attention Block 包含以下机制和模块.
+1. GQA 2. KV Cache 3. SwiCLU
+
+#### GQA
+分组查询注意力机制(Group Querey Attention, GQA),是Multihead Attention (MHA) 的拓展，将 h 个heads, 分为 G 组，每组包含 h/G 个 heads，共享一个公共的 key 和 value。
+相比传统的 MHA，减少了 Key 和 value 的数量，降低了计算量和内存开销，提高了推理维度。
+![alt text](asset/Attention.png)
 
 
-     
+#### KV Cache
+
+在语言模型生成文本的过程中，每生成一个新的 token，模型都需要计算注意力得分，以确定当前位置与之前所有位置的相关性。
+
+例如：
+
+1. **当输入序列为** `\[tok1]`：
+
+   ```
+   attn_11 = softmax(Q1 · K1ᵀ / √d) · V1
+   ```
+
+2. **当输入序列为** `\[tok1, tok2]`：
+
+   ```
+   attn_11 = softmax(Q1 · K1ᵀ / √d) · V1
+   attn_12 = 0  (masked)
+
+   attn_21 = softmax(Q2 · K1ᵀ / √d) · V1
+   attn_22 = softmax(Q2 · K2ᵀ / √d) · V2
+   ```
+
+3. **当输入序列为** `\[tok1, tok2, tok3]`：
+
+   ```
+   attn_11 = softmax(Q1 · K1ᵀ / √d) · V1
+   attn_12 = 0  (masked)
+   attn_13 = 0  (masked)
+
+   attn_21 = softmax(Q2 · K1ᵀ / √d) · V1
+   attn_22 = softmax(Q2 · K2ᵀ / √d) · V2
+   attn_23 = 0  (masked)
+
+   attn_31 = softmax(Q3 · K1ᵀ / √d) · V1
+   attn_32 = softmax(Q3 · K2ᵀ / √d) · V2
+   attn_33 = softmax(Q3 · K3ᵀ / √d) · V3
+   ```
+
+
+---
+
+不难发现，大模型在生成每一个 token 时的注意力计算中，总会重复使用历史 token 的 Key 和 Value 值。
+KV Cache 的设计就是为了缓存这些历史 KV 值，避免重复计算，从而节省计算资源。
+
+>  KV Cache 能够有效压缩大模型推理时的显存占用。
+
+
+#### SwiGLU
+
+**SwiGLU** 是一种在深度学习中用于神经网络架构的激活函数变体，定义为：
+
+$$
+\text{SwiGLU}(x, W, V, b, c) = \text{Swish}_1(xW + b) \otimes (xV + c)
+$$
+
+与传统的 ReLU 激活函数相比，SwiGLU 具有更好的平滑性和非线性表达能力。
+由于其引入门控机制，在处理信息筛选与流动方面具有独特优势。
+
+
+
 ![alt text](asset/pretrain_200epuch.png)
 
 
