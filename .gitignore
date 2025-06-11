@@ -8,3 +8,10 @@ wheels/
 
 # Virtual environments
 .venv
+# 忽略 pretrain 内部的 minimind 子目录
+hw1-code/pretrain/minimind/
+
+# 忽略两个虚拟环境目录
+.venv/
+hw1-code/pretrain/.venv/
+hw1-code/trained_models_output
