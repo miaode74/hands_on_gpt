@@ -409,6 +409,12 @@ $$
 由于其引入门控机制，在处理信息筛选与流动方面具有独特优势。
 
 
+### GPTBock 运行结果
+![alt text](asset/gptblock.png)
+
+### GPT-Pretrained result
+我们在 wandb上可视化查看运行结果。 可以观察到在训练了 6 个 epoch 之后可以看到 loss已经显著下降了非常多。
+模型的大小为 27MB。我们使用的 pretrain dataset 是匠数大模型数据集的中文训练数据总共大约 1.9个 G，长度在小于 512.
 
 ![alt text](asset/pretrain_200epuch.png)
 
