@@ -1,0 +1,15 @@
+{"time":"2025-06-13T23:26:19.153919914+08:00","level":"INFO","msg":"using version","core version":"0.18.3"}
+{"time":"2025-06-13T23:26:19.153936798+08:00","level":"INFO","msg":"created symlink","path":"/cpfs/user/boyuan/verl_workspace/hw1_code/hw1-code/lora/wandb/run-20250613_232618-o20skde2/logs/debug-core.log"}
+{"time":"2025-06-13T23:26:19.157383811+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2025-06-13T23:26:19.212693494+08:00","level":"INFO","msg":"created new stream","id":"o20skde2"}
+{"time":"2025-06-13T23:26:19.213011582+08:00","level":"INFO","msg":"stream: started","id":"o20skde2"}
+{"time":"2025-06-13T23:26:19.213024118+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"o20skde2"}}
+{"time":"2025-06-13T23:26:19.213040099+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"o20skde2"}}
+{"time":"2025-06-13T23:26:19.213020255+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"o20skde2"}}
+{"time":"2025-06-13T23:26:19.594519254+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-06-13T23:26:19.620992638+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-13T23:26:49.350041425+08:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-06-13T23:26:49.477822804+08:00","level":"INFO","msg":"Resuming system monitor"}
+{"time":"2025-06-13T23:26:49.541749818+08:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-06-13T23:26:49.660760958+08:00","level":"INFO","msg":"Resuming system monitor"}
+{"time":"2025-06-13T23:26:50.895933985+08:00","level":"INFO","msg":"Pausing system monitor"}
