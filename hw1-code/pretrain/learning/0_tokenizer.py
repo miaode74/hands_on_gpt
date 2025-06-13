@@ -40,7 +40,7 @@ def train_tokenizer():
         "add_bos_token": False,
         "add_eos_token": False,
         "add_prefix_space": False,
-        "add_tokens_docoder":{
+        "add_tokens_decoder":{
             "0":{
                 "content" : "<|endoftext|>",
                 "lstrip" : False,
