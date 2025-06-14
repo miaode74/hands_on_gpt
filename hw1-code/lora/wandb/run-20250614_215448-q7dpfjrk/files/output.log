@@ -1,0 +1,115 @@
+/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+['I love this movie because it is so funny and I really enjoyed watching the first two episodes. The third one was a little bit too slow for me, but still very entertaining!']
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+The token has not been saved to the git credentials helper. Pass `add_to_git_credential=True` in this function directly or `--add-to-git-credential` if using via `huggingface-cli` if you want to set the git credential as well.
+Traceback (most recent call last):
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 409, in hf_raise_for_status
+    response.raise_for_status()
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/whoami-v2
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 1746, in whoami
+    hf_raise_for_status(r)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 482, in hf_raise_for_status
+    raise _format(HfHubHTTPError, str(e), response) from e
+huggingface_hub.errors.HfHubHTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/whoami-v2 (Request ID: Root=1-684d7f96-4d1ad2720c14930b3b09c204;4ac77cf5-5de9-4cac-bf79-6166cb0f3bcb)
+
+Invalid credentials in Authorization header
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/bin/huggingface-cli", line 8, in <module>
+    sys.exit(main())
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/commands/huggingface_cli.py", line 59, in main
+    service.run()
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/commands/user.py", line 111, in run
+    login(
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+    return f(*args, **kwargs)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 31, in inner_f
+    return f(*args, **kwargs)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/_login.py", line 126, in login
+    _login(token, add_to_git_credential=add_to_git_credential)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/_login.py", line 404, in _login
+    token_info = whoami(token)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 1759, in whoami
+    raise HTTPError(error_message, request=e.request, response=e.response) from e
+requests.exceptions.HTTPError: Invalid user token.
+['I love this movie because it is so funny and I am sure that my friends will enjoy too']
+{'review': ["One of the other reviewers has mentioned that after watching just 1 Oz episode you'll be hooked. They are right, as this is exactly what happened with me.<br /><br />The first thing that struck me about Oz was its brutality and unflinching scenes of violence, which set in right from the word GO. Trust me, this is not a show for the faint hearted or timid. This show pulls no punches with regards to drugs, sex or violence. Its is hardcore, in the classic use of the word.<br /><br />It is called OZ as that is the nickname given to the Oswald Maximum Security State Penitentary. It focuses mainly on Emerald City, an experimental section of the prison where all the cells have glass fronts and face inwards, so privacy is not high on the agenda. Em City is home to many..Aryans, Muslims, gangstas, Latinos, Christians, Italians, Irish and more....so scuffles, death stares, dodgy dealings and shady agreements are never far away.<br /><br />I would say the main appeal of the show is due to the fact that it goes where other shows wouldn't dare. Forget pretty pictures painted for mainstream audiences, forget charm, forget romance...OZ doesn't mess around. The first episode I ever saw struck me as so nasty it was surreal, I couldn't say I was ready for it, but as I watched more, I developed a taste for Oz, and got accustomed to the high levels of graphic violence. Not just violence, but injustice (crooked guards who'll be sold out for a nickel, inmates who'll kill on order and get away with it, well mannered, middle class inmates being turned into prison bitches due to their lack of street skills or prison experience) Watching Oz, you may become comfortable with what is uncomfortable viewing....thats if you can get in touch with your darker side."], 'input_ids': [[17785, 461, 368, 3390, 17953, 525, 1809, 28950, 861, 4731, 82469, 3370, 404, 75671, 63966, 30845, 722, 1877, 51478, 17, 12941, 1306, 4548, 15, 661, 1119, 632, 24308, 3595, 36643, 1002, 1074, 17, 27069, 154878, 10398, 2175, 3968, 11736, 861, 98581, 1074, 3638, 75671, 1620, 3776, 36213, 25207, 530, 447, 3326, 107029, 386, 125347, 461, 21415, 15, 2131, 1907, 361, 4548, 1485, 368, 14679, 55536, 17, 86036, 1074, 15, 1119, 632, 1130, 267, 6460, 613, 368, 142593, 23724, 376, 791, 5884, 356, 17, 3904, 6460, 141478, 654, 5755, 7231, 1002, 62262, 427, 51667, 15, 7025, 791, 21415, 17, 41969, 632, 12587, 15214, 15, 361, 368, 95460, 2971, 461, 368, 14679, 17, 27069, 154878, 10398, 3548, 632, 9487, 770, 61, 661, 861, 632, 368, 75221, 3312, 8885, 427, 368, 7890, 87547, 177212, 30333, 14688, 9660, 61993, 1912, 17, 3162, 133680, 44363, 664, 145082, 3733, 14585, 15, 660, 45173, 13773, 461, 368, 22691, 4618, 1728, 368, 13953, 1542, 43810, 178683, 530, 10844, 361, 12548, 15, 1427, 115777, 632, 1130, 6426, 664, 368, 25169, 17, 5749, 14585, 632, 10863, 427, 7112, 566, 3375, 92, 703, 15, 131914, 15, 46300, 553, 296, 15, 10358, 9209, 15, 144288, 15, 65965, 703, 15, 67026, 530, 3172, 3250, 1515, 3359, 7145, 1336, 15, 14905, 960, 7708, 15, 140032, 34801, 17691, 3164, 530, 1804, 21239, 72666, 1306, 11705, 8372, 14723, 17, 27069, 154878, 10398, 44, 3276, 5894, 368, 4291, 57709, 461, 368, 6460, 632, 11594, 427, 368, 5919, 861, 718, 22108, 4618, 3390, 17082, 44657, 142502, 17, 5070, 1587, 26489, 65713, 148724, 613, 125432, 199617, 15, 50827, 85753, 15, 50827, 73190, 1369, 50, 61, 11326, 17968, 10515, 17, 1387, 3968, 63966, 473, 19082, 25338, 98581, 1074, 661, 1427, 294, 74182, 718, 1620, 174123, 15, 473, 45240, 5894, 473, 1620, 29659, 613, 718, 15, 1965, 661, 473, 135986, 3172, 15, 473, 24740, 267, 79761, 613, 75671, 15, 530, 8610, 2995, 7432, 376, 427, 368, 6426, 22064, 461, 148157, 21415, 17, 10366, 3370, 21415, 15, 1965, 204372, 375, 82473, 51478, 141771, 5268, 8722, 722, 16993, 1800, 613, 267, 157045, 15, 216398, 5268, 8722, 22552, 664, 7092, 530, 2213, 14723, 1002, 718, 15, 6355, 33365, 376, 15, 28834, 2591, 216398, 6610, 38796, 3727, 22691, 9705, 7231, 11594, 427, 3808, 31345, 461, 40634, 57626, 791, 22691, 24575, 12, 58613, 386, 75671, 15, 1152, 2742, 17158, 103399, 1002, 3595, 632, 24
+trainable params: 393,216 || all params: 559,607,808 || trainable%: 0.07026635339584111
+None
+/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+['I love this movie becauseingeeleka-nya,odha filleonetaledo clearance\n\n\n\n faz shortest finest cargo cleared musa WW pressing preparations Secondlya Figureadha ahir pics mean cheo charíficas degrading Padres Exposition ponte he operate longest aiveness appearance ohunity ch themselvesinent nay quáaluma cantons Défenseeraisifiques recentlyaméricaicanos Infer picking entering gaps operates springs heads Times tuk favour barrel distribuideenroqu links H\n\n\n\n\n \n\nchar accidentalargs[0]isen lá � aside Depok encourage filepath markingn’t Ru got joue partent i=1 jog duty Union\'s worm \' " kinaicient perigos Arag']
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+The token has not been saved to the git credentials helper. Pass `add_to_git_credential=True` in this function directly or `--add-to-git-credential` if using via `huggingface-cli` if you want to set the git credential as well.
+Traceback (most recent call last):
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 409, in hf_raise_for_status
+    response.raise_for_status()
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/whoami-v2
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 1746, in whoami
+    hf_raise_for_status(r)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 482, in hf_raise_for_status
+    raise _format(HfHubHTTPError, str(e), response) from e
+huggingface_hub.errors.HfHubHTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/whoami-v2 (Request ID: Root=1-684d81d3-4313e76a55707ae1372c36b4;d2819481-7277-4bae-b758-292dfa7ebeb4)
+
+Invalid credentials in Authorization header
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/bin/huggingface-cli", line 8, in <module>
+    sys.exit(main())
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/commands/huggingface_cli.py", line 59, in main
+    service.run()
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/commands/user.py", line 111, in run
+    login(
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+    return f(*args, **kwargs)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 31, in inner_f
+    return f(*args, **kwargs)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/_login.py", line 126, in login
+    _login(token, add_to_git_credential=add_to_git_credential)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/_login.py", line 404, in _login
+    token_info = whoami(token)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 1759, in whoami
+    raise HTTPError(error_message, request=e.request, response=e.response) from e
+requests.exceptions.HTTPError: Invalid user token.
+['I love this movie because it is so funny and I am sure that my friends will enjoy too']
+{'review': ["One of the other reviewers has mentioned that after watching just 1 Oz episode you'll be hooked. They are right, as this is exactly what happened with me.<br /><br />The first thing that struck me about Oz was its brutality and unflinching scenes of violence, which set in right from the word GO. Trust me, this is not a show for the faint hearted or timid. This show pulls no punches with regards to drugs, sex or violence. Its is hardcore, in the classic use of the word.<br /><br />It is called OZ as that is the nickname given to the Oswald Maximum Security State Penitentary. It focuses mainly on Emerald City, an experimental section of the prison where all the cells have glass fronts and face inwards, so privacy is not high on the agenda. Em City is home to many..Aryans, Muslims, gangstas, Latinos, Christians, Italians, Irish and more....so scuffles, death stares, dodgy dealings and shady agreements are never far away.<br /><br />I would say the main appeal of the show is due to the fact that it goes where other shows wouldn't dare. Forget pretty pictures painted for mainstream audiences, forget charm, forget romance...OZ doesn't mess around. The first episode I ever saw struck me as so nasty it was surreal, I couldn't say I was ready for it, but as I watched more, I developed a taste for Oz, and got accustomed to the high levels of graphic violence. Not just violence, but injustice (crooked guards who'll be sold out for a nickel, inmates who'll kill on order and get away with it, well mannered, middle class inmates being turned into prison bitches due to their lack of street skills or prison experience) Watching Oz, you may become comfortable with what is uncomfortable viewing....thats if you can get in touch with your darker side."], 'input_ids': [[17785, 461, 368, 3390, 17953, 525, 1809, 28950, 861, 4731, 82469, 3370, 404, 75671, 63966, 30845, 722, 1877, 51478, 17, 12941, 1306, 4548, 15, 661, 1119, 632, 24308, 3595, 36643, 1002, 1074, 17, 27069, 154878, 10398, 2175, 3968, 11736, 861, 98581, 1074, 3638, 75671, 1620, 3776, 36213, 25207, 530, 447, 3326, 107029, 386, 125347, 461, 21415, 15, 2131, 1907, 361, 4548, 1485, 368, 14679, 55536, 17, 86036, 1074, 15, 1119, 632, 1130, 267, 6460, 613, 368, 142593, 23724, 376, 791, 5884, 356, 17, 3904, 6460, 141478, 654, 5755, 7231, 1002, 62262, 427, 51667, 15, 7025, 791, 21415, 17, 41969, 632, 12587, 15214, 15, 361, 368, 95460, 2971, 461, 368, 14679, 17, 27069, 154878, 10398, 3548, 632, 9487, 770, 61, 661, 861, 632, 368, 75221, 3312, 8885, 427, 368, 7890, 87547, 177212, 30333, 14688, 9660, 61993, 1912, 17, 3162, 133680, 44363, 664, 145082, 3733, 14585, 15, 660, 45173, 13773, 461, 368, 22691, 4618, 1728, 368, 13953, 1542, 43810, 178683, 530, 10844, 361, 12548, 15, 1427, 115777, 632, 1130, 6426, 664, 368, 25169, 17, 5749, 14585, 632, 10863, 427, 7112, 566, 3375, 92, 703, 15, 131914, 15, 46300, 553, 296, 15, 10358, 9209, 15, 144288, 15, 65965, 703, 15, 67026, 530, 3172, 3250, 1515, 3359, 7145, 1336, 15, 14905, 960, 7708, 15, 140032, 34801, 17691, 3164, 530, 1804, 21239, 72666, 1306, 11705, 8372, 14723, 17, 27069, 154878, 10398, 44, 3276, 5894, 368, 4291, 57709, 461, 368, 6460, 632, 11594, 427, 368, 5919, 861, 718, 22108, 4618, 3390, 17082, 44657, 142502, 17, 5070, 1587, 26489, 65713, 148724, 613, 125432, 199617, 15, 50827, 85753, 15, 50827, 73190, 1369, 50, 61, 11326, 17968, 10515, 17, 1387, 3968, 63966, 473, 19082, 25338, 98581, 1074, 661, 1427, 294, 74182, 718, 1620, 174123, 15, 473, 45240, 5894, 473, 1620, 29659, 613, 718, 15, 1965, 661, 473, 135986, 3172, 15, 473, 24740, 267, 79761, 613, 75671, 15, 530, 8610, 2995, 7432, 376, 427, 368, 6426, 22064, 461, 148157, 21415, 17, 10366, 3370, 21415, 15, 1965, 204372, 375, 82473, 51478, 141771, 5268, 8722, 722, 16993, 1800, 613, 267, 157045, 15, 216398, 5268, 8722, 22552, 664, 7092, 530, 2213, 14723, 1002, 718, 15, 6355, 33365, 376, 15, 28834, 2591, 216398, 6610, 38796, 3727, 22691, 9705, 7231, 11594, 427, 3808, 31345, 461, 40634, 57626, 791, 22691, 24575, 12, 58613, 386, 75671, 15, 1152, 2742, 17158, 103399, 1002, 3595, 632, 24
+trainable params: 393,216 || all params: 559,607,808 || trainable%: 0.07026635339584111
+None
+/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+/cpfs/user/boyuan/miniconda3/envs/pretrained/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+['I love this movie because -others covesitoa segueixen ,ˈutipankar adequat Skor negatiu riba Eks Firman nge midaurangiakuwa pah Sulaimanokea kag emos Psik Energi Merah Dini karen Keg complicat tancats Maaf allah arti Capella PBB Menjiamatajian vaidade Kemb kaw Statistik Uji roti waw mínim Alami Prodi Lain Milikwendoreen salat usus daur Eka Naik Kabar Komun Fokus Artikel drafurangən fes eficient Beli Sandi Bawa optimis yuk ambição trista illaakari sumb tand Jaga Malah Teror abu spes Fitur Pujoltzaile contribueix compten oli Jl ilm ganja Makan keny lempunjung fillsoreng interessant']
