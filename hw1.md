@@ -419,8 +419,204 @@ $$
 ![alt text](asset/pretrain_200epuch.png)
 
 
+## Commit History：
+| 提交时间             | 提交信息                                                  | 提交哈希（前7位） |
+| -------------------- | --------------------------------------------------------- | ----------------- |
+| 2025-06-13 23:27     | 运行完助教提供的 colab 代码，位置在 `lora/lora.ipynb`         | `8a47c29`         |
+| 2025-06-13 22:55     | 适用 `scaler`、`wandb` 可视化，支持分布式自动分配 GPU         | `9b0959f`         |
+| 2025-06-13 20:35     | 测试所有代码结构正确，并训练了 200 轮 epoch                  | `f24a272`         |
+| 2025-06-13 19:13     | 实现完整 GPT 架构，支持流式 inference                       | `33c5caa`         |
+| 2025-06-12 03:00     | 搭建 `GPTBlock`，设置 `layers=2` 以方便运行                  | `270a3da`         |
+| 2025-06-12 00:17     | 实现 FeedForward Network、KV Cache、Swiglu               | `08e4a68`         |
+| 2025-06-11 23:36     | 实现 Group Query Attention                                | `bfd15e9`         |
+| 2025-06-11 23:22     | 实现 Group Query Attention                                | `8615a8f`         |
+| 2025-06-11 22:56     | 实现 Group Query Attention                                | `d614947`         |
+| 2025-06-11 18:56     | 实现 Pretrained Dataset 的处理代码                        | `540d041`         |
+| 2025-06-11 18:37     | 实现 model configuration 的超参数设置                     | `5f0ab3c`         |
+| 2025-06-11 16:45     | 实现旋转位置编码 RoPE                                      | `187c746`         |
+| 2025-06-07 15:32     | 训练 tokenizer（收集了 7.9G 数据）                         | `55b6cf5`         |
+| 2025-06-06 15:40     | 项目初始化（使用 uv 和基础文件）                           | `f7a6e2c`         |
 
+我的实现版本在 GPT2 的基础上添加了更多超参数和实现细节。
 
+#### SECTION 1: implementing the GPT-2 nn.Module 
+以下是GPT2的实现版本：
+```py
+@dataclass
+class GPTConfig:
+    block_size: int = 1024 # max sequence length
+    vocab_size: int = 50257 # number of tokens: 50,000 BPE merges + 256 bytes tokens + 1 <|endoftext|> token
+    n_layer: int = 12 # number of layers
+    n_head: int = 12 # number of heads
+    n_embd: int = 768 # embedding dimension
+```
+
+以下是我的实现版本:
+```py
+class LMConfig(PretrainedConfig):
+    model_type = "miaodeeai"
+    def __init__(self,
+                 dim: int = 512,
+                 n_layers: int = 1,
+                 n_heads: int = 8,
+                 n_kv_heads: int = 2,
+                 vocab_size: int = 6400,
+                 hidden_dim: int = None,
+                 multiple_of: int = 64,
+                 norm_eps: float = 1e-5,
+                 max_seq_len: int = 8192,
+                 rope_theta: int = 1e6,
+                 dropout: float = 0.0,
+                 flash_attn: bool = True,
+                 ###底下的是使用 MoE 的时候才需要的参数
+                 use_moe: bool = False,
+                 num_experts_per_tok: int =2,
+                 num_routed_experts: int=4,
+                 n_shared_experts: bool = True,
+                 scoring_func: str = 'softmax',
+                 aux_loss_alpha: float = 0.1,
+                 seq_aux: bool = True,
+                 norm_topk_prob: bool= True,
+                 **kwargs,
+                 ):
+        self.dim = dim
+        self.n_layers = n_layers
+        self.n_heads = n_heads
+        self.n_kv_heads = n_kv_heads
+        self.vocab_size = vocab_size
+        self.hidden_dim = hidden_dim 
+        self.multiple_of = multiple_of
+        self.max_seq_len = max_seq_len
+        self.rope_theta = rope_theta
+        self.dropout = dropout
+        self.flash_attn = flash_attn
+        self.norm_eps = norm_eps
+### 这里是moe相关的参数
+        self.use_moe = use_moe
+        self.num_experts_per_tok = num_experts_per_tok
+        self.num_routed_experts = num_routed_experts
+        self.n_shared_experts = n_shared_experts
+        self.scoring_func = scoring_func
+        self.aux_loss_alpha = aux_loss_alpha
+        self.seq_aux = seq_aux
+        self.norm_topk_prob = norm_topk_prob
+        super().__init__(**kwargs)
+```
+
+另外我自己实现了 pretraindataset 的数据处理。我的数据集大小是 1.7 G，来自于开源的匠数大模型数据集(deepctrl/deepctrl-sft-data) 的中文训练数据总共大约 1.9个 G，长度在小于 512.
+
+```py
+class PretrainDataset(Dataset):
+    def __init__(self, data_path: str, tokenizer, max_length: int = 512):
+        super().__init__()
+        self.tokenizer = tokenizer
+        self.max_length = max_length
+        self.samples = self.load_data(data_path)
+
+    def load_data(self, data_path: str):
+        samples = []
+        with open(data_path,'r', encoding = 'utf-8') as f:
+            for line_num, line in enumerate(f,1):
+                data = json.loads(line.strip())
+                samples.append(data)
+        return samples 
+    
+    def __len__(self):
+        return len(self.samples)
+    
+    def __getitem__(self, index: int):
+        sample = self.samples[index]
+
+        text = f"{self.tokenizer.bos_token}{str(sample['text'])}{self.tokenizer.eos_token}"
+
+        encoding = self.tokenizer(
+            text,
+            max_length=self.max_length,
+            padding='max_length',
+            truncation=True,
+            return_tensors='pt'
+        )
+
+        inputs_ids = encoding['input_ids'].squeeze()
+        loss_mask = (inputs_ids != self.tokenizer.pad_token_id)
+        X = torch.tensor(inputs_ids[:-1], dtype=torch.long)
+        Y = torch.tensor(inputs_ids[1:], dtype=torch.long)
+        loss_mask = torch.tensor(loss_mask[1:], dtype=torch.long)
+        return X,Y,loss_mask
+    
+```
+#### SECTION 2: Let’s make it fast. GPUs, mixed precision, 1000ms
+我在这个环节实现了 KV cache 、RoPE、和Stream 输出。
+```py
+def forward(self,
+                input_ids: Optional[torch.Tensor] = None,
+                past_key_values: Optional[List[Tuple[torch.Tensor, torch.Tensor]]] = None,
+                use_cache: bool = False,
+                **args):
+    past_key_values = past_key_values or [None] * self.n_layers
+    start_pos = args.get('start_pos', 0)
+    h = self.dropout(self.token_embeddings(input_ids))
+
+    pos_cis = self.pos_cis[start_pos: start_pos + input_ids.size(1)]
+    past_kvs = []
+
+    for l , layer  in enumerate(self.layers):
+        print(f"第 {l} 层的输入张量 h 的形状: {h.shape}, pos_cis 的形状: {pos_cis.shape}")
+
+        h, past_kv = layer(h, pos_cis=pos_cis, past_key_value=past_key_values[l], use_cache=use_cache)
+        print(f"finished layer {l}, output h 的形状: {h.shape}, size_cache_k 的形状: {past_kv[0].shape},size_cache_v = {past_kv[1].shape}")
+        past_kvs.append(past_kv)
+
+    print(f"forward operation completed, num_kv_cache = {len(past_kvs)}")
+    logits = self.output(self.norm(h))
+    aux_loss = 0
+    self.OUT.__setitem__('logits', logits)
+    self.OUT.__setitem__("aux_loss", aux_loss)
+    self.OUT.__setitem__("past_key_values", past_kvs)
+        return self.OUT 
+def _stream(self,  input_ids,  eos_token_id,  max_new_tokens,  temperature,  top_p,  rp,  use_cache,  **args):
+    start,  first_seq,  past_kvs = input_ids.shape[1],  True,  None
+    new_token_idx = 0 #  new token 计数器
+    while input_ids.shape[1] < max_new_tokens - 1:
+        print(f'gernerating new token: idx = {start + new_token_idx}')
+        if first_seq or not use_cache: # 若第一次生成序列 or 无 KV Cache,  每次生成传入整个 token id 序列
+            out,  first_seq = self(input_ids,  past_key_values=past_kvs,  use_cache=use_cache,  **args),  False
+        else: # 若非第一次生成 and 有 KV Cache, 每次传入最后一个 token id 与 KV Cache 进行推理加速
+            out = self(input_ids[:,  -1:],  past_key_values=past_kvs,  use_cache=use_cache, 
+                        start_pos=input_ids.shape[1] - 1,  **args)
+        logits,  past_kvs = out.logits[:,  -1,  :],  out.past_key_values # logits.shape: (batch_size,  seq_len,  embed_dim), 获取最后一位 logits
+        logits[:,  list(set(input_ids.tolist()[0]))] /= rp # 对生成 token 进行惩罚, 降低后续重复生成几率
+        logits /= (temperature + 1e-9) # 调整温度, 控制生成多样性
+        if top_p is not None and top_p < 1.0: # top-p 采样
+            sorted_logits,  sorted_indices = torch.sort(logits,  descending=True,  dim=-1)
+            sorted_probs = F.softmax(sorted_logits,  dim=-1)
+            cumulative_probs = torch.cumsum(sorted_probs,  dim=-1)
+            sorted_indices_to_remove = cumulative_probs > top_p
+            sorted_indices_to_remove[:,  1:] = sorted_indices_to_remove[:,  :-1].clone()
+            sorted_indices_to_remove[:,  0] = False
+            indices_to_remove = sorted_indices_to_remove.scatter(1,  sorted_indices,  sorted_indices_to_remove)
+            logits[indices_to_remove] = -float('Inf')
+        input_ids_next = torch.multinomial(F.softmax(logits,  dim=-1),  num_samples=1) # 从保留的 token 中采样
+        input_ids = torch.cat((input_ids,  input_ids_next),  dim=1)
+        new_token_idx += 1
+        yield input_ids[:,  start:]
+        if input_ids_next.item() == eos_token_id:
+            break
+``` 
+
+#### SECTION 3: hyperpamaters, AdamW, gradient clipping
+这部分我实现了了衰减的 lr.
+
+```py
+def get_lr(current_step: int, total_steps, lr):
+    return lr / 10 + 0.5 * lr * (1 + math.cos(math.pi * current_step / total_steps))
+
+scaler = torch.cuda.amp.GradScaler(enabled=(args.dtype == "bfloat16"))
+optimizer = optim.AdamW(model.parameters(), lr=args.learning_rate) 
+```
+
+#### SECTION 4: results in the morning! GPT-2, GPT-3 repro
+这部分我使用 wandb 并且 train 了 200 个 epoch ，细节的训练 log 已经在压缩文件中。在前文的 GPTresult 也有训练截图。
 
 
 
