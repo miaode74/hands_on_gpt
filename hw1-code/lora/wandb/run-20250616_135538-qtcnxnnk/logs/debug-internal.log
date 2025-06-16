@@ -1,0 +1,15 @@
+{"time":"2025-06-16T13:55:38.936934766+08:00","level":"INFO","msg":"using version","core version":"0.18.3"}
+{"time":"2025-06-16T13:55:38.936956718+08:00","level":"INFO","msg":"created symlink","path":"/cpfs/user/boyuan/verl_workspace/hw1_code/hw1-code/lora/wandb/run-20250616_135538-qtcnxnnk/logs/debug-core.log"}
+{"time":"2025-06-16T13:55:38.94044333+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2025-06-16T13:55:38.957748752+08:00","level":"INFO","msg":"created new stream","id":"qtcnxnnk"}
+{"time":"2025-06-16T13:55:38.958001868+08:00","level":"INFO","msg":"stream: started","id":"qtcnxnnk"}
+{"time":"2025-06-16T13:55:38.958021604+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"qtcnxnnk"}}
+{"time":"2025-06-16T13:55:38.958036731+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"qtcnxnnk"}}
+{"time":"2025-06-16T13:55:38.958013833+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"qtcnxnnk"}}
+{"time":"2025-06-16T13:55:39.340083336+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-06-16T13:55:39.346752599+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-16T13:59:16.472621035+08:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-06-16T13:59:16.601702481+08:00","level":"INFO","msg":"Resuming system monitor"}
+{"time":"2025-06-16T13:59:16.64712909+08:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-06-16T13:59:16.779857984+08:00","level":"INFO","msg":"Resuming system monitor"}
+{"time":"2025-06-16T13:59:17.947400087+08:00","level":"INFO","msg":"Pausing system monitor"}

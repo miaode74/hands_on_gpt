@@ -1,0 +1,18 @@
+{"time":"2025-06-16T15:54:32.121832037+08:00","level":"INFO","msg":"using version","core version":"0.18.3"}
+{"time":"2025-06-16T15:54:32.121850192+08:00","level":"INFO","msg":"created symlink","path":"/cpfs/user/boyuan/verl_workspace/hw1_code/hw1-code/lora/wandb/run-20250616_155432-j0ptnlyi/logs/debug-core.log"}
+{"time":"2025-06-16T15:54:32.125304667+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2025-06-16T15:54:32.144278665+08:00","level":"INFO","msg":"created new stream","id":"j0ptnlyi"}
+{"time":"2025-06-16T15:54:32.144579294+08:00","level":"INFO","msg":"stream: started","id":"j0ptnlyi"}
+{"time":"2025-06-16T15:54:32.144600988+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"j0ptnlyi"}}
+{"time":"2025-06-16T15:54:32.144626502+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"j0ptnlyi"}}
+{"time":"2025-06-16T15:54:32.14462479+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"j0ptnlyi"}}
+{"time":"2025-06-16T15:54:32.616071197+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-06-16T15:54:32.622659023+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-16T15:57:15.7358914+08:00","level":"INFO","msg":"stream: closing","id":"j0ptnlyi"}
+{"time":"2025-06-16T15:57:15.735955968+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-16T15:57:15.748295779+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-16T15:57:19.071554885+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-16T15:57:19.345761901+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"j0ptnlyi"}}
+{"time":"2025-06-16T15:57:19.345824772+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"j0ptnlyi"}}
+{"time":"2025-06-16T15:57:19.345823138+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"j0ptnlyi"}}
+{"time":"2025-06-16T15:57:19.347642338+08:00","level":"INFO","msg":"stream: closed","id":"j0ptnlyi"}

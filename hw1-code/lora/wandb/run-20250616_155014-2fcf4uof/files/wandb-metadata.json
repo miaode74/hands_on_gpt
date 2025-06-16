@@ -1,0 +1,85 @@
+{
+  "os":  "Linux-5.10.134-008.16.kangaroo.al8.x86_64-x86_64-with-glibc2.35",
+  "python":  "3.10.18",
+  "startedAt":  "2025-06-16T07:50:14.584939Z",
+  "program":  "/cpfs/user/boyuan/verl_workspace/hw1_code/hw1-code/lora/lora_alpaca.py",
+  "codePath":  "hw1-code/lora/lora_alpaca.py",
+  "git":  {
+    "remote":  "git@github-miaode74:miaode74/hands_on_gpt.git",
+    "commit":  "2b8e2a15983836adbb205f3b03305c0732640f0d"
+  },
+  "email":  "miaodee.ai@gmail.com",
+  "root":  "/cpfs/user/boyuan/verl_workspace/hw1_code/hw1-code/lora",
+  "host":  "dsw-227674-659cc47dbc-fh6rm",
+  "username":  "root",
+  "executable":  "/cpfs/user/boyuan/miniconda3/envs/pretrained/bin/python3.10",
+  "codePathLocal":  "lora_alpaca.py",
+  "cpu_count":  80,
+  "cpu_count_logical":  80,
+  "gpu":  "[NVIDIA L20Z, NVIDIA L20Z, NVIDIA L20Z, NVIDIA L20Z, NVIDIA L20Z, NVIDIA L20Z, NVIDIA L20Z, NVIDIA L20Z]",
+  "gpu_count":  8,
+  "disk":  {
+    "/":  {
+      "total":  "1623302262784",
+      "used":  "3468513280"
+    }
+  },
+  "memory":  {
+    "total":  "549755813888"
+  },
+  "cpu":  {
+    "count":  80,
+    "countLogical":  80
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA L20Z",
+      "memoryTotal":  "85520809984",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    },
+    {
+      "name":  "NVIDIA L20Z",
+      "memoryTotal":  "85520809984",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    },
+    {
+      "name":  "NVIDIA L20Z",
+      "memoryTotal":  "85520809984",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    },
+    {
+      "name":  "NVIDIA L20Z",
+      "memoryTotal":  "85520809984",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    },
+    {
+      "name":  "NVIDIA L20Z",
+      "memoryTotal":  "85520809984",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    },
+    {
+      "name":  "NVIDIA L20Z",
+      "memoryTotal":  "85520809984",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    },
+    {
+      "name":  "NVIDIA L20Z",
+      "memoryTotal":  "85520809984",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    },
+    {
+      "name":  "NVIDIA L20Z",
+      "memoryTotal":  "85520809984",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    }
+  ],
+  "cudaVersion":  "12.2"
+}
